@@ -1,5 +1,6 @@
 package com.east.service.impl;
 
+import java.util.List;
 import java.util.Set;
 
 import org.slf4j.Logger;
@@ -69,6 +70,20 @@ public class UserServiceImpl implements UserService {
 	public User findById(Long id) {
 		// TODO Auto-generated method stub
 		return userRepository.findOne(id);
+	}
+
+
+	@Override
+	public User findOne(Long id) {
+		// TODO Auto-generated method stub
+		return userRepository.findOne(id);
+	}
+
+
+	@Override
+	public List<User> findAll() {
+		// TODO Auto-generated method stub
+		return userRepository.findAll();
 	}
 	
 }

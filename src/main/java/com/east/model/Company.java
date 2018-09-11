@@ -43,6 +43,10 @@ public class Company  implements UserDetails, Serializable {
 	@OneToMany(mappedBy = "company", cascade=CascadeType.ALL, fetch= FetchType.EAGER)
 	@JsonIgnore
 	private Set<UserRole> userRoles = new HashSet<>();
+	
+	@OneToMany(mappedBy = "company", cascade=CascadeType.ALL, fetch= FetchType.EAGER)
+	@JsonIgnore
+	private Set<Employee> employee = new HashSet<>();
 
 	public Long getId() {
 		return id;
@@ -111,6 +115,15 @@ public class Company  implements UserDetails, Serializable {
 
 	public void setUserRoles(Set<UserRole> userRoles) {
 		this.userRoles = userRoles;
+	}
+	
+
+	public Set<Employee> getEmployee() {
+		return employee;
+	}
+
+	public void setEmployee(Set<Employee> employee) {
+		this.employee = employee;
 	}
 
 	@Override

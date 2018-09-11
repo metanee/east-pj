@@ -73,6 +73,20 @@ public class EastPjApplication implements CommandLineRunner{
 		role3.setName("ROLE_Owner");
 		userRoles.add(new UserRole(null,company1, role3));
 		companyService.createCompany(company1, userRoles);
+		userRoles.clear();
+		
+		Company company2 = new Company();
+		company2.setFirstName("sadawd");
+		company2.setLastName("wdwad");
+		company2.setUsername("aaa");
+		company2.setPassword(SecurityUtility.passwordEncoder().encode("p"));
+		company2.setEmail("aaaa@gmail.com");
+		
+		Role role4 = new Role();
+		role4.setRoleId(3);
+		role4.setName("ROLE_Owner");
+		userRoles.add(new UserRole(null,company2, role4));
+		companyService.createCompany(company2, userRoles);
 
 		
 	}

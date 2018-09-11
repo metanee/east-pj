@@ -50,6 +50,10 @@ public class User implements UserDetails, Serializable {
 	@OneToMany(mappedBy = "user", cascade=CascadeType.ALL, fetch= FetchType.EAGER)
 	@JsonIgnore
 	private Set<UserRole> userRoles = new HashSet<>();
+	
+	@OneToMany(mappedBy = "user", cascade=CascadeType.ALL, fetch= FetchType.EAGER)
+	@JsonIgnore
+	private Set<Employee> employee = new HashSet<>();
 
 	public Long getId() {
 		return id;
@@ -137,6 +141,14 @@ public class User implements UserDetails, Serializable {
 		this.userRoles = userRoles;
 	}
 	
+
+	public Set<Employee> getEmployee() {
+		return employee;
+	}
+
+	public void setEmployee(Set<Employee> employee) {
+		this.employee = employee;
+	}
 
 	public MultipartFile getUserImage() {
 		return userImage;

@@ -1,5 +1,6 @@
 package com.east.service;
 
+import java.util.List;
 import java.util.Set;
 
 import com.east.model.User;
@@ -15,4 +16,10 @@ public interface UserService {
 	 User save(User user);
 	 
 	 User findById(Long id);
+	 
+	User findOne(Long id);
+	
+	List<User> findAll();
+
+
 }
