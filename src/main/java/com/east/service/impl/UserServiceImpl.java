@@ -1,5 +1,6 @@
 package com.east.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -83,7 +84,18 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public List<User> findAll() {
 		// TODO Auto-generated method stub
-		return userRepository.findAll();
+  List<User> userList = (List<User>) userRepository.findAll();
+		
+		List<User> activeBookList = new ArrayList<>();
+		
+		for (User user : userList) {
+			if(user.isEnabled()) {
+				activeBookList.add(user);
+			}
+		}
+		
+		return activeBookList;
 	}
+	
 	
 }

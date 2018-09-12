@@ -21,6 +21,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -194,7 +195,7 @@ public class UserController {
 		}
 	}
 
-	@RequestMapping("/getCurrentUser")
+	@RequestMapping(value="/getCurrentUser")
 	public User getCurrentUser(Principal principal) {
 		String username = principal.getName();
 		User user = new User();
@@ -205,8 +206,19 @@ public class UserController {
 		return user;
 	}
 	
-	@RequestMapping("/userList")
+	@RequestMapping(value="/userList")
 	public List<User> getBookList() {
+	 List<User> userList = (List<User>) userService.findAll();
+
+		System.out.println("55555555555555555555"+userList);
 		return userService.findAll();
 	}
+	
+	@RequestMapping("/{id}")
+	public User getUser(@PathVariable("id") Long id){
+		User user = userService.findOne(id);
+		System.out.println("666666666666666666666666666666666666666666666666666666666666");
+		return user;
+	}
+	
 }
