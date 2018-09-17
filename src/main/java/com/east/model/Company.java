@@ -3,6 +3,7 @@ package com.east.model;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -44,9 +45,9 @@ public class Company  implements UserDetails, Serializable {
 	@JsonIgnore
 	private Set<UserRole> userRoles = new HashSet<>();
 	
-	@OneToMany(mappedBy = "company", cascade=CascadeType.ALL, fetch= FetchType.EAGER)
+	@OneToMany(cascade=CascadeType.ALL, mappedBy = "company")
 	@JsonIgnore
-	private Set<Employee> employee = new HashSet<>();
+	private List<Employee> employeeList;
 
 	public Long getId() {
 		return id;
@@ -118,12 +119,12 @@ public class Company  implements UserDetails, Serializable {
 	}
 	
 
-	public Set<Employee> getEmployee() {
-		return employee;
+	public List<Employee> getEmployeeList() {
+		return employeeList;
 	}
 
-	public void setEmployee(Set<Employee> employee) {
-		this.employee = employee;
+	public void setEmployeeList(List<Employee> employeeList) {
+		this.employeeList = employeeList;
 	}
 
 	@Override

@@ -13,6 +13,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -51,9 +52,9 @@ public class User implements UserDetails, Serializable {
 	@JsonIgnore
 	private Set<UserRole> userRoles = new HashSet<>();
 	
-	@OneToMany(mappedBy = "user", cascade=CascadeType.ALL, fetch= FetchType.EAGER)
+	@OneToOne(cascade=CascadeType.ALL,  mappedBy = "user" )
 	@JsonIgnore
-	private Set<Employee> employee = new HashSet<>();
+	private Employee employee;
 
 	public Long getId() {
 		return id;
@@ -142,11 +143,13 @@ public class User implements UserDetails, Serializable {
 	}
 	
 
-	public Set<Employee> getEmployee() {
+	
+
+	public Employee getEmployee() {
 		return employee;
 	}
 
-	public void setEmployee(Set<Employee> employee) {
+	public void setEmployee(Employee employee) {
 		this.employee = employee;
 	}
 

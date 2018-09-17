@@ -1,5 +1,6 @@
 package com.east.service.impl;
 
+import java.util.ArrayList;
 import java.util.Set;
 
 import org.slf4j.Logger;
@@ -8,9 +9,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.east.model.Company;
+import com.east.model.Employee;
+import com.east.model.User;
 import com.east.model.UserRole;
 import com.east.repository.CompanyRepository;
+import com.east.repository.EmployeeRepository;
 import com.east.repository.RoleRepository;
+import com.east.repository.UserRepository;
 import com.east.service.CompanyService;
 import com.east.service.UserService;
 
@@ -22,6 +27,12 @@ public class CompanyServiceImpl implements CompanyService{
 	
 	@Autowired
 	private CompanyRepository companyRepository;
+	
+	@Autowired
+	private UserRepository userRepository;
+	
+	@Autowired
+	private EmployeeRepository employeeRepository;
 
 
 	@Autowired
@@ -37,7 +48,13 @@ public class CompanyServiceImpl implements CompanyService{
 				roleRepository.save(ur.getRole());
 				
 			}
+			
+			company.setEmployeeList(new ArrayList<Employee>());
+
+
 			company.getUserRoles().addAll(userRoles);
+			
+			
 			localCompany = companyRepository.save(company);
 		}
 		// TODO Auto-generated method stub
@@ -47,25 +64,36 @@ public class CompanyServiceImpl implements CompanyService{
 	@Override
 	public Company findByUsername(String username) {
 		// TODO Auto-generated method stub
-		return null;
+		return companyRepository.findByUsername(username);
 	}
 
 	@Override
 	public Company findByEmail(String email) {
 		// TODO Auto-generated method stub
-		return null;
+		return companyRepository.findByEmail(email);
 	}
 
 	@Override
 	public Company save(Company company) {
 		// TODO Auto-generated method stub
-		return null;
+		return companyRepository.save(company);
 	}
 
+	
 	@Override
 	public Company findById(Long id) {
 		// TODO Auto-generated method stub
-		return null;
+		return companyRepository.findOne(id);
+	}
+
+
+	@Override
+	public void updateUserPaymentInfo(Employee employee, Company company, User user) {
+		employee.setCompany(company);
+		employee.setUser(user);
+		company.getEmployeeList().add(employee);
+		
+		save(company);		
 	}
 
 }
