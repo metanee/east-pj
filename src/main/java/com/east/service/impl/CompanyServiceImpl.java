@@ -88,7 +88,7 @@ public class CompanyServiceImpl implements CompanyService{
 
 
 	@Override
-	public void updateUserPaymentInfo(Employee employee, Company company, User user) {
+	public void addEmployeeFromUser(Employee employee, Company company, User user) {
 		employee.setCompany(company);
 		employee.setUser(user);
 		company.getEmployeeList().add(employee);

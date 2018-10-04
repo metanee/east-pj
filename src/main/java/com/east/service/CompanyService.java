@@ -18,6 +18,6 @@ public interface CompanyService {
 	 
 	Company findById(Long id);
 	
-	void updateUserPaymentInfo(Employee employee, Company company, User user);
+	void addEmployeeFromUser(Employee employee, Company company, User user);
 
 }

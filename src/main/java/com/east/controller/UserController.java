@@ -75,6 +75,7 @@ public class UserController {
 		user.setPassword(encryptedPassword);
 		Role role = new Role();
 		role.setRoleId(1);
+		role.setName("ROLE_USER");
 		Set<UserRole> userRoles = new HashSet<>();
 		userRoles.add(new UserRole(user,null,role));
 		userService.createUser(user, userRoles);
@@ -217,7 +218,7 @@ public class UserController {
 	@RequestMapping("/{id}")
 	public User getUser(@PathVariable("id") Long id){
 		User user = userService.findOne(id);
-		System.out.println("666666666666666666666666666666666666666666666666666666666666");
+		//System.out.println("666666666666666666666666666666666666666666666666666666666666");
 		return user;
 	}
 	

@@ -3,6 +3,7 @@ package com.east.model;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -55,6 +56,11 @@ public class User implements UserDetails, Serializable {
 	@OneToOne(cascade=CascadeType.ALL,  mappedBy = "user" )
 	@JsonIgnore
 	private Employee employee;
+	
+	@OneToMany(cascade=CascadeType.ALL, mappedBy = "user")
+	@JsonIgnore
+	private List<Comment> commentList;
+	
 
 	public Long getId() {
 		return id;
@@ -159,6 +165,16 @@ public class User implements UserDetails, Serializable {
 
 	public void setUserImage(MultipartFile userImage) {
 		this.userImage = userImage;
+	}
+	
+	
+
+	public List<Comment> getCommentList() {
+		return commentList;
+	}
+
+	public void setCommentList(List<Comment> commentList) {
+		this.commentList = commentList;
 	}
 
 	@Override

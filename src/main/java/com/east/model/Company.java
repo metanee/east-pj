@@ -48,6 +48,10 @@ public class Company  implements UserDetails, Serializable {
 	@OneToMany(cascade=CascadeType.ALL, mappedBy = "company")
 	@JsonIgnore
 	private List<Employee> employeeList;
+	
+	@OneToMany(cascade=CascadeType.ALL, mappedBy = "company")
+	@JsonIgnore
+	private List<Comment> commentList;
 
 	public Long getId() {
 		return id;
@@ -125,6 +129,15 @@ public class Company  implements UserDetails, Serializable {
 
 	public void setEmployeeList(List<Employee> employeeList) {
 		this.employeeList = employeeList;
+	}
+	
+
+	public List<Comment> getCommentList() {
+		return commentList;
+	}
+
+	public void setCommentList(List<Comment> commentList) {
+		this.commentList = commentList;
 	}
 
 	@Override

@@ -13,45 +13,43 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 @Entity
-@Table(name = "employee")
-public class Employee implements Serializable {
-
-	private static final long serialVersionUID = 9027834625L;
+@Table(name = "comments")
+public class Comment implements Serializable{
+	
+	private static final long serialVersionUID = 9027834855L;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long employeeId;
+	private long commentId;
 	
-	public Employee() {}
+	public Comment() {}
 	
-	public Employee (User user, Company company) {
+	public Comment (User user, Company company) {
 		this.user = user;
 		this.company = company;
 	}
 	
-	@OneToOne(cascade=CascadeType.ALL)
+	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name = "user_id")
 	private User user;
 	
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "company_id")
 	private Company company;
-
-	@OneToOne(mappedBy = "employee", cascade=CascadeType.ALL)
-	@JsonIgnore
-	private Comment comment;
 	
-	private String jobposition;
+	@OneToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name = "employee_id")
+	private Employee employee;
+	
+	private String commentcription;
 
-	public long getEmployeeId() {
-		return employeeId;
+	public long getCommentId() {
+		return commentId;
 	}
 
-	public void setEmployeeId(long employeeId) {
-		this.employeeId = employeeId;
+	public void setCommentId(long commentId) {
+		this.commentId = commentId;
 	}
 
 	public User getUser() {
@@ -70,25 +68,26 @@ public class Employee implements Serializable {
 		this.company = company;
 	}
 
-	public String getJobposition() {
-		return jobposition;
+	public String getCommentcription() {
+		return commentcription;
 	}
 
-	public void setJobposition(String jobposition) {
-		this.jobposition = jobposition;
+	public void setCommentcription(String commentcription) {
+		this.commentcription = commentcription;
 	}
 
-	public Comment getComment() {
-		return comment;
+	public Employee getEmployee() {
+		return employee;
 	}
 
-	public void setComment(Comment comment) {
-		this.comment = comment;
+	public void setEmployee(Employee employee) {
+		this.employee = employee;
 	}
+	
+	
+	
+ 
 
-	
-	
-	
-	
-	
+
+
 }
