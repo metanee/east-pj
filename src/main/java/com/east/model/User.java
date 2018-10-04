@@ -41,13 +41,32 @@ public class User implements UserDetails, Serializable {
 	private String lastName;
 	private String gender;
 	private String birthDay;
-	
+	private String nationality;
+	private String address;
+	private String religion;
+	private String education;
+	private String institute;
+	private String faculty;
+	private String branch;
+	private String startyearEducation;
+	private String endyearEducation;
+	private String gpaEducation;
+	private String startmonthJobexp;
+	private String startyearhJobexp;
+	private String endyearJobexp;
+	private String endmonthJobexp;
+	private String companyNameJobexp;
+	private String careerJobexp;
+	private String salaryJobexp;
+	private String descriptionJobexp;
 	private String email;
 	private String phone;
 	private boolean enabled = true;
 	
 	@Transient
 	private MultipartFile userImage;
+	
+	private String partImage;
 	
 	@OneToMany(mappedBy = "user", cascade=CascadeType.ALL, fetch= FetchType.EAGER)
 	@JsonIgnore
@@ -136,6 +155,14 @@ public class User implements UserDetails, Serializable {
 
 	
 
+	public String getPartImage() {
+		return partImage;
+	}
+
+	public void setPartImage(String partImage) {
+		this.partImage = partImage;
+	}
+
 	public void setEnabled(boolean enabled) {
 		this.enabled = enabled;
 	}
@@ -175,6 +202,150 @@ public class User implements UserDetails, Serializable {
 
 	public void setCommentList(List<Comment> commentList) {
 		this.commentList = commentList;
+	}
+
+	public String getNationality() {
+		return nationality;
+	}
+
+	public void setNationality(String nationality) {
+		this.nationality = nationality;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getReligion() {
+		return religion;
+	}
+
+	public void setReligion(String religion) {
+		this.religion = religion;
+	}
+
+	public String getEducation() {
+		return education;
+	}
+
+	public void setEducation(String education) {
+		this.education = education;
+	}
+
+	public String getInstitute() {
+		return institute;
+	}
+
+	public void setInstitute(String institute) {
+		this.institute = institute;
+	}
+
+	public String getFaculty() {
+		return faculty;
+	}
+
+	public void setFaculty(String faculty) {
+		this.faculty = faculty;
+	}
+
+	public String getBranch() {
+		return branch;
+	}
+
+	public void setBranch(String branch) {
+		this.branch = branch;
+	}
+
+	public String getStartyearEducation() {
+		return startyearEducation;
+	}
+
+	public void setStartyearEducation(String startyearEducation) {
+		this.startyearEducation = startyearEducation;
+	}
+
+	public String getEndyearEducation() {
+		return endyearEducation;
+	}
+
+	public void setEndyearEducation(String endyearEducation) {
+		this.endyearEducation = endyearEducation;
+	}
+
+	public String getGpaEducation() {
+		return gpaEducation;
+	}
+
+	public void setGpaEducation(String gpaEducation) {
+		this.gpaEducation = gpaEducation;
+	}
+
+	public String getStartmonthJobexp() {
+		return startmonthJobexp;
+	}
+
+	public void setStartmonthJobexp(String startmonthJobexp) {
+		this.startmonthJobexp = startmonthJobexp;
+	}
+
+	public String getStartyearhJobexp() {
+		return startyearhJobexp;
+	}
+
+	public void setStartyearhJobexp(String startyearhJobexp) {
+		this.startyearhJobexp = startyearhJobexp;
+	}
+
+	public String getEndyearJobexp() {
+		return endyearJobexp;
+	}
+
+	public void setEndyearJobexp(String endyearJobexp) {
+		this.endyearJobexp = endyearJobexp;
+	}
+
+	public String getEndmonthJobexp() {
+		return endmonthJobexp;
+	}
+
+	public void setEndmonthJobexp(String endmonthJobexp) {
+		this.endmonthJobexp = endmonthJobexp;
+	}
+
+	public String getCompanyNameJobexp() {
+		return companyNameJobexp;
+	}
+
+	public void setCompanyNameJobexp(String companyNameJobexp) {
+		this.companyNameJobexp = companyNameJobexp;
+	}
+
+	public String getCareerJobexp() {
+		return careerJobexp;
+	}
+
+	public void setCareerJobexp(String careerJobexp) {
+		this.careerJobexp = careerJobexp;
+	}
+
+	public String getSalaryJobexp() {
+		return salaryJobexp;
+	}
+
+	public void setSalaryJobexp(String salaryJobexp) {
+		this.salaryJobexp = salaryJobexp;
+	}
+
+	public String getDescriptionJobexp() {
+		return descriptionJobexp;
+	}
+
+	public void setDescriptionJobexp(String descriptionJobexp) {
+		this.descriptionJobexp = descriptionJobexp;
 	}
 
 	@Override
