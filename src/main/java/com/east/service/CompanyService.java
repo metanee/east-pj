@@ -1,5 +1,6 @@
 package com.east.service;
 
+import java.util.List;
 import java.util.Set;
 
 import com.east.model.Company;
@@ -12,6 +13,7 @@ public interface CompanyService {
 	Company createCompany(Company company, Set<UserRole> userRoles);
 	Company findByUsername(String username);
 	Company findByEmail (String email);
+	List<Company> findAll();
 	 
 
 	Company save(Company company);

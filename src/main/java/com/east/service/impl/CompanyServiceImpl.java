@@ -1,6 +1,7 @@
 package com.east.service.impl;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 import org.slf4j.Logger;
@@ -94,6 +95,12 @@ public class CompanyServiceImpl implements CompanyService{
 		company.getEmployeeList().add(employee);
 		
 		save(company);		
+	}
+
+	@Override
+	public List<Company> findAll() {
+		  List<Company> companyList =  companyRepository.findAll();
+		 return companyList;
 	}
 
 }

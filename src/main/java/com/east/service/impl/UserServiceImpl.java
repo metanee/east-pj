@@ -96,6 +96,20 @@ public class UserServiceImpl implements UserService {
 		
 		return activeBookList;
 	}
+
+
+	@Override
+	public void removeOne(Long id) {
+		userRepository.delete(id);
+		
+	}
+
+
+	@Override
+	public List<User> blurrySearch(String keyword) {
+		List<User> userSearch = userRepository.findByIdcardContaining(keyword);
+		return userSearch;
+	}
 	
 	
 }

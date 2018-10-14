@@ -2,7 +2,9 @@ package com.east.controller;
 
 import java.security.Principal;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,7 +18,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.east.model.Comment;
 import com.east.model.Company;
 import com.east.model.Employee;
+import com.east.model.Role;
 import com.east.model.User;
+import com.east.model.UserRole;
 import com.east.service.CommentService;
 import com.east.service.CompanyService;
 import com.east.service.EmployeeService;
@@ -45,10 +49,17 @@ public class EmployeeController  {
 			Principal principal) {
 		Employee employee = new Employee();
 		int id =  (Integer) mapper.get("userId");
-		//System.out.println(id);
+		String firstName = (String) mapper.get("firstNameEmployee");
+		String lastName = (String) mapper.get("lastNameEmployee");
+		String gender = (String) mapper.get("genderEmployee");
+		System.out.println(id);
 		Company company = companyService.findByUsername(principal.getName());
 		User user = userService.findById(Long.valueOf(id));
-		//System.out.println(user.getEmail());
+		System.out.println(company.getId());
+		employee.setFirstNameEmployee(firstName);
+		employee.setLastNameEmployee(lastName);
+		employee.setGenderEmployee(gender);
+		
 		companyService.addEmployeeFromUser(employee, company ,user );
 		
 		
@@ -63,6 +74,7 @@ public class EmployeeController  {
 		Comment comment = new Comment();
 		int userId =  (Integer) mapper.get("userId");
 		int employeeId =  (Integer) mapper.get("employeeId");
+		String cmment = (String) mapper.get("commentcription");
 		
 		//System.out.println(id);
 		Company company = companyService.findByUsername(principal.getName());
@@ -71,7 +83,7 @@ public class EmployeeController  {
 		System.out.println(company.getId());
 		System.out.println(user.getId());
 		System.out.println(employee.getEmployeeId());
-		
+		comment.setCommentcription(cmment);
 		//System.out.println(user.getEmail());
 		commmentService.CreateComment(employee,company, user ,comment );
 		
@@ -96,6 +108,28 @@ public class EmployeeController  {
 		Employee employee = employeeService.findOne(id);
 		//System.out.println(employee.getEmployeeId());
 		return employee;
+	}
+	
+	@RequestMapping(value="/updateEmployeeInfo", method=RequestMethod.POST)
+	public ResponseEntity profileInfo(
+				@RequestBody HashMap<String, Object> mapper
+			) throws Exception{
+		
+		int id = (Integer) mapper.get("employeeId");
+		String jobposition = (String) mapper.get("jobposition");
+		String sarary = (String) mapper.get("sarary");
+		
+		
+		Employee employee = employeeService.findOne(Long.valueOf(id));
+			
+		employee.setJobposition(jobposition);
+		employee.setSarary(sarary);
+		
+		//currentUser.setUsername(username);
+		
+		employeeService.save(employee);
+		
+		return new ResponseEntity("Update Success", HttpStatus.OK);
 	}
 	
 }

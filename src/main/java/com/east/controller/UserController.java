@@ -3,8 +3,7 @@ package com.east.controller;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.io.IOException;
 import java.security.Principal;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -58,6 +57,7 @@ public class UserController {
 			) throws Exception {
 		String username = mapper.get("username");
 		String userEmail = mapper.get("email");
+		String idcard = mapper.get("idcard");
 		
 		if(userService.findByUsername(username) != null) {
 			return new ResponseEntity("usernameExists", HttpStatus.BAD_REQUEST);
@@ -66,9 +66,13 @@ public class UserController {
 		if(userService.findByEmail(userEmail) != null) {
 		return new ResponseEntity("emailExists", HttpStatus.BAD_REQUEST);
 	}
+		if(userService.findByEmail(idcard) != null) {
+			return new ResponseEntity("idcardExists", HttpStatus.BAD_REQUEST);
+		}
 		User user = new User();
 		user.setUsername(username);
 		user.setEmail(userEmail);
+		user.setIdcard(idcard);
 		
 		String password = SecurityUtility.randomPassword();
 		String encryptedPassword = SecurityUtility.passwordEncoder().encode(password);
@@ -109,6 +113,34 @@ public class UserController {
 		
 	}
 	
+	@RequestMapping(value="/passwordUserInfo", method=RequestMethod.POST)
+	public ResponseEntity passwordinfo(
+				@RequestBody HashMap<String, Object> mapper
+			) throws Exception{
+		int id = (Integer) mapper.get("id");
+		String newPassword = (String) mapper.get("new_pass");
+		String currentPassword = (String) mapper.get("old_pass");
+		String email = (String) mapper.get("email");
+		User currentUser = userService.findById(Long.valueOf(id));
+		SecurityConfig securityConfig = new SecurityConfig();
+		
+		
+		BCryptPasswordEncoder passwordEncoder = SecurityUtility.passwordEncoder();
+		String dbPassword = currentUser.getPassword();
+		
+		if(null != currentPassword)
+		if(passwordEncoder.matches(currentPassword, dbPassword)) {
+			if(newPassword != null && !newPassword.isEmpty() && !newPassword.equals("")) {
+				currentUser.setPassword(passwordEncoder.encode(newPassword));
+			}
+			currentUser.setEmail(email);
+		} else {
+			return new ResponseEntity("Incorrect current password!", HttpStatus.BAD_REQUEST);
+		}
+		userService.save(currentUser);
+		return new ResponseEntity("Update Success", HttpStatus.OK);
+	}
+	
 	@RequestMapping(value="/updateUserInfo", method=RequestMethod.POST)
 	public ResponseEntity profileInfo(
 				@RequestBody HashMap<String, Object> mapper
@@ -116,11 +148,32 @@ public class UserController {
 		
 		int id = (Integer) mapper.get("id");
 		String email = (String) mapper.get("email");
-		String username = (String) mapper.get("username");
+		//String username = (String) mapper.get("username");
+		
 		String firstName = (String) mapper.get("firstName");
 		String lastName = (String) mapper.get("lastName");
-		String newPassword = (String) mapper.get("newPassword");
-		String currentPassword = (String) mapper.get("currentPassword");
+		String gender = (String) mapper.get("gender");
+		String birthDay = (String) mapper.get("birthDay");
+		String nationality = (String) mapper.get("nationality");
+		String address = (String) mapper.get("address");
+		String religion = (String) mapper.get("religion");
+		String education = (String) mapper.get("education");
+		String institute = (String) mapper.get("institute");
+		String faculty = (String) mapper.get("faculty");
+		String branch = (String) mapper.get("branch");
+		String startyearEducation = (String) mapper.get("startyearEducation");
+		String endyearEducation = (String) mapper.get("endyearEducation");
+		String gpaEducation = (String) mapper.get("gpaEducation");
+		String startmonthJobexp = (String) mapper.get("startmonthJobexp");
+		String startyearhJobexp = (String) mapper.get("startyearhJobexp");
+		String endyearJobexp = (String) mapper.get("endyearJobexp");
+		String endmonthJobexp = (String) mapper.get("endmonthJobexp");
+		String companyNameJobexp = (String) mapper.get("companyNameJobexp");
+		String careerJobexp = (String) mapper.get("careerJobexp");
+		String salaryJobexp = (String) mapper.get("salaryJobexp");
+		String descriptionJobexp = (String) mapper.get("descriptionJobexp");
+		String phone = (String) mapper.get("phone");
+		
 		
 		User currentUser = userService.findById(Long.valueOf(id));
 		
@@ -128,40 +181,46 @@ public class UserController {
 			throw new Exception ("User not found");
 		}
 		
-		if(userService.findByEmail(email) != null) {
+		/*if(userService.findByEmail(email) != null) {
 			if(userService.findByEmail(email).getId() != currentUser.getId()) {
 				return new ResponseEntity("Email not found!", HttpStatus.BAD_REQUEST);
 			}
-		}
+		}*/
 		
-		if(userService.findByUsername(username) != null) {
+		/*if(userService.findByUsername(username) != null) {
 			if(userService.findByUsername(username).getId() != currentUser.getId()) {
 				return new ResponseEntity("Username not found!", HttpStatus.BAD_REQUEST);
 			}
-		}
-		
-		SecurityConfig securityConfig = new SecurityConfig();
-		
-		
-			BCryptPasswordEncoder passwordEncoder = SecurityUtility.passwordEncoder();
-			String dbPassword = currentUser.getPassword();
-			
-			if(null != currentPassword)
-			if(passwordEncoder.matches(currentPassword, dbPassword)) {
-				if(newPassword != null && !newPassword.isEmpty() && !newPassword.equals("")) {
-					currentUser.setPassword(passwordEncoder.encode(newPassword));
-				}
-				currentUser.setEmail(email);
-			} else {
-				return new ResponseEntity("Incorrect current password!", HttpStatus.BAD_REQUEST);
-			}
-		
+		}*/
 		
 		currentUser.setFirstName(firstName);
 		currentUser.setLastName(lastName);
-		currentUser.setUsername(username);
+		currentUser.setGender(gender);
+		currentUser.setBirthDay(birthDay);
+		currentUser.setNationality(nationality);
+		currentUser.setAddress(address);
+		currentUser.setReligion(religion);
+		currentUser.setEducation(education);
+		currentUser.setInstitute(institute);
+		currentUser.setFaculty(faculty);
+		currentUser.setBranch(branch);
+		currentUser.setStartyearEducation(startyearEducation);
+		currentUser.setEndyearEducation(endyearEducation);
+		currentUser.setGpaEducation(gpaEducation);
+		currentUser.setStartmonthJobexp(startmonthJobexp);
+		currentUser.setEndmonthJobexp(endmonthJobexp);
+		currentUser.setStartyearhJobexp(startyearhJobexp);
+		currentUser.setEndyearJobexp(endyearJobexp);
+		currentUser.setCompanyNameJobexp(companyNameJobexp);
+		currentUser.setCareerJobexp(careerJobexp);
+		currentUser.setSalaryJobexp(salaryJobexp);
+		currentUser.setDescriptionJobexp(descriptionJobexp);
+		currentUser.setPhone(phone);
+		
+		//currentUser.setUsername(username);
 		Role role = new Role();
 		role.setRoleId(1);
+		role.setName("ROLE_USER");
 		Set<UserRole> userRoles = new HashSet<>();
 		userRoles.add(new UserRole(currentUser,null,role));
 		
@@ -177,10 +236,11 @@ public class UserController {
 			){
 		try {
 			User user = userService.findOne(id);
+			String idcard = user.getIdcard();
 			MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
 			Iterator<String> it = multipartRequest.getFileNames();
 			MultipartFile multipartFile = multipartRequest.getFile(it.next());
-			String fileName = id+".png";
+			String fileName = id+idcard+".png";
 			
 			//Files.delete(Paths.get("src/main/resources/static/image/user/"+fileName));
 			
@@ -188,7 +248,8 @@ public class UserController {
 			BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(new File("src/main/resources/static/image/user/"+fileName)));
 			stream.write(bytes);
 			stream.close();
-			
+			user.setPartImage("http://localhost:8080/image/user/"+fileName);
+			userService.save(user);
 			return new ResponseEntity("Upload Success!", HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -209,17 +270,42 @@ public class UserController {
 	
 	@RequestMapping(value="/userList")
 	public List<User> getBookList() {
-	 List<User> userList = (List<User>) userService.findAll();
+	 List<User> userList = userService.findAll();
 
 		System.out.println("55555555555555555555"+userList);
-		return userService.findAll();
+		return userList;
 	}
 	
 	@RequestMapping("/{id}")
 	public User getUser(@PathVariable("id") Long id){
 		User user = userService.findOne(id);
-		//System.out.println("666666666666666666666666666666666666666666666666666666666666");
+		System.out.println("666666666666666666666666666666666666666666666666666666666666");
 		return user;
 	}
 	
+	@RequestMapping(value="/remove", method=RequestMethod.POST)
+	public ResponseEntity remove(
+			@RequestBody String id
+			) throws IOException {
+		userService.removeOne(Long.parseLong(id));
+		//String fileName = id+".png";
+		
+		//Files.delete(Paths.get("src/main/resources/static/image/book/"+fileName));
+		
+		return new ResponseEntity("Remove Success!", HttpStatus.OK);
+	}
+	
+	@RequestMapping(value="/searchUser", method=RequestMethod.POST)
+	public List<User> searchBook (@RequestBody HashMap<String, Object> mapper) {
+		
+		String idcard = (String) mapper.get("searchText");
+		if (idcard != null) {
+			System.out.println(idcard);
+			List<User> userSearch = userService.blurrySearch(idcard);
+			return userSearch;
+		}else {
+			return userService.findAll();
+		}
+		
+	}
 }

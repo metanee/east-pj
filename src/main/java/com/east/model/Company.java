@@ -34,9 +34,8 @@ public class Company  implements UserDetails, Serializable {
 	
 	private String username;
 	private String password;
-	private String firstName;
-	private String lastName;
-	
+	private String companyName;
+	private String address;
 	private String email;
 	private String phone;
 	private boolean enabled = true;
@@ -77,20 +76,21 @@ public class Company  implements UserDetails, Serializable {
 		this.password = password;
 	}
 
-	public String getFirstName() {
-		return firstName;
+
+	public String getCompanyName() {
+		return companyName;
 	}
 
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
+	public void setCompanyName(String companyName) {
+		this.companyName = companyName;
 	}
 
-	public String getLastName() {
-		return lastName;
+	public String getAddress() {
+		return address;
 	}
 
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
+	public void setAddress(String address) {
+		this.address = address;
 	}
 
 	public String getEmail() {

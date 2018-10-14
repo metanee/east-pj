@@ -60,7 +60,9 @@ public class User implements UserDetails, Serializable {
 	private String salaryJobexp;
 	private String descriptionJobexp;
 	private String email;
+	private String idcard;
 	private String phone;
+	private boolean nowjob = false;
 	private boolean enabled = true;
 	
 	@Transient
@@ -117,6 +119,14 @@ public class User implements UserDetails, Serializable {
 		return lastName;
 	}
 
+	public String getIdcard() {
+		return idcard;
+	}
+
+	public void setIdcard(String idcard) {
+		this.idcard = idcard;
+	}
+
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
@@ -153,7 +163,13 @@ public class User implements UserDetails, Serializable {
 		this.phone = phone;
 	}
 
-	
+	public boolean isNowjob() {
+		return nowjob;
+	}
+
+	public void setNowjob(boolean nowjob) {
+		this.nowjob = nowjob;
+	}
 
 	public String getPartImage() {
 		return partImage;

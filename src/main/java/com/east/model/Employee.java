@@ -44,7 +44,15 @@ public class Employee implements Serializable {
 	@JsonIgnore
 	private Comment comment;
 	
+	private String firstNameEmployee;
+	private String lastNameEmployee;
+	private String genderEmployee;
 	private String jobposition;
+	private String sarary;
+	private boolean invice = false;
+	private String inviceDate;
+	private String startJobDate;
+	private String endJobDate;
 
 	public long getEmployeeId() {
 		return employeeId;
@@ -68,6 +76,72 @@ public class Employee implements Serializable {
 
 	public void setCompany(Company company) {
 		this.company = company;
+	}
+	
+
+	public String getFirstNameEmployee() {
+		return firstNameEmployee;
+	}
+
+	public void setFirstNameEmployee(String firstNameEmployee) {
+		this.firstNameEmployee = firstNameEmployee;
+	}
+
+	public String getLastNameEmployee() {
+		return lastNameEmployee;
+	}
+
+	public void setLastNameEmployee(String lastNameEmployee) {
+		this.lastNameEmployee = lastNameEmployee;
+	}
+
+	public String getGenderEmployee() {
+		return genderEmployee;
+	}
+
+	public void setGenderEmployee(String genderEmployee) {
+		this.genderEmployee = genderEmployee;
+	}
+
+	public String getSarary() {
+		return sarary;
+	}
+
+
+	public boolean isInvice() {
+		return invice;
+	}
+
+	public void setInvice(boolean invice) {
+		this.invice = invice;
+	}
+
+	public void setSarary(String sarary) {
+		this.sarary = sarary;
+	}
+
+	public String getInviceDate() {
+		return inviceDate;
+	}
+
+	public void setInviceDate(String inviceDate) {
+		this.inviceDate = inviceDate;
+	}
+
+	public String getStartJobDate() {
+		return startJobDate;
+	}
+
+	public void setStartJobDate(String startJobDate) {
+		this.startJobDate = startJobDate;
+	}
+
+	public String getEndJobDate() {
+		return endJobDate;
+	}
+
+	public void setEndJobDate(String endJobDate) {
+		this.endJobDate = endJobDate;
 	}
 
 	public String getJobposition() {
