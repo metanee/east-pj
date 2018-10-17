@@ -62,6 +62,7 @@ public class User implements UserDetails, Serializable {
 	private String email;
 	private String idcard;
 	private String phone;
+	private String role;
 	private boolean nowjob = false;
 	private boolean enabled = true;
 	
@@ -101,6 +102,14 @@ public class User implements UserDetails, Serializable {
 
 	public String getPassword() {
 		return password;
+	}
+
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
 	}
 
 	public void setPassword(String password) {

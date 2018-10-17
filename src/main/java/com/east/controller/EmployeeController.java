@@ -51,11 +51,17 @@ public class EmployeeController  {
 		int id =  (Integer) mapper.get("userId");
 		String firstName = (String) mapper.get("firstNameEmployee");
 		String lastName = (String) mapper.get("lastNameEmployee");
-		String gender = (String) mapper.get("genderEmployee");
-		System.out.println(id);
+		String gender = (String) mapper.get("genderEmployee"); 
+		//System.out.println(id);
 		Company company = companyService.findByUsername(principal.getName());
 		User user = userService.findById(Long.valueOf(id));
-		System.out.println(company.getId());
+		
+		//System.out.println(company.getId());
+		if (user.isNowjob() == true) {
+			return new ResponseEntity("User JobExistes  !", HttpStatus.BAD_REQUEST);
+			
+		}
+		user.setNowjob(true);
 		employee.setFirstNameEmployee(firstName);
 		employee.setLastNameEmployee(lastName);
 		employee.setGenderEmployee(gender);
@@ -91,8 +97,20 @@ public class EmployeeController  {
 		return new ResponseEntity("Payment Added(Updated) Successfully!", HttpStatus.OK);
 	}
 	
+	@RequestMapping("/getCommentList/{id}")
+	public List<Comment> getUserCommentList(
+			@PathVariable("id") Long id
+			){
+		User user = userService.findOne(id);
+		//System.out.println(company.getEmail());
+		List<Comment> userComment = user.getCommentList();
+		//System.out.println(userPaymentList);
+		
+		return userComment;
+	}
+	
 	@RequestMapping("/getEmployeeList")
-	public List<Employee> getUserPaymentList(
+	public List<Employee> getEmployeeList(
 			Principal principal
 			){
 		Company company = companyService.findByUsername(principal.getName());

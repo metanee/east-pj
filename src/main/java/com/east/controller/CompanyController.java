@@ -61,7 +61,7 @@ public class CompanyController {
 		company.setUsername(username);
 		company.setEmail(userEmail);
 		company.setAddress(address);
-		company.setCompanyName(companyName);
+		company.setFirstName(companyName);
 		
 		String password = SecurityUtility.randomPassword();
 		String encryptedPassword = SecurityUtility.passwordEncoder().encode(password);

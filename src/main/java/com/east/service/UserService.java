@@ -19,13 +19,15 @@ public interface UserService {
 	 
 	 User findById(Long id);
 	 
+	 User findByIdcard(String idcard);
+	 
 	User findOne(Long id);
 	
 	void removeOne(Long id);
 	
 	List<User> findAll();
 	
-	List<User> blurrySearch(String keyword);
+	//List<User> blurrySearch(String keyword);
 	
 	
 

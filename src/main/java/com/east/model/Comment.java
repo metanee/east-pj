@@ -43,6 +43,11 @@ public class Comment implements Serializable{
 	private Employee employee;
 	
 	private String commentcription;
+	
+	private String firstNameEmployee;
+	private String lastNameEmployee;
+	private String jobposition;
+	private String sarary;
 
 	public long getCommentId() {
 		return commentId;
@@ -82,6 +87,38 @@ public class Comment implements Serializable{
 
 	public void setEmployee(Employee employee) {
 		this.employee = employee;
+	}
+
+	public String getFirstNameEmployee() {
+		return firstNameEmployee;
+	}
+
+	public void setFirstNameEmployee(String firstNameEmployee) {
+		this.firstNameEmployee = firstNameEmployee;
+	}
+
+	public String getLastNameEmployee() {
+		return lastNameEmployee;
+	}
+
+	public void setLastNameEmployee(String lastNameEmployee) {
+		this.lastNameEmployee = lastNameEmployee;
+	}
+
+	public String getJobposition() {
+		return jobposition;
+	}
+
+	public void setJobposition(String jobposition) {
+		this.jobposition = jobposition;
+	}
+
+	public String getSarary() {
+		return sarary;
+	}
+
+	public void setSarary(String sarary) {
+		this.sarary = sarary;
 	}
 	
 	

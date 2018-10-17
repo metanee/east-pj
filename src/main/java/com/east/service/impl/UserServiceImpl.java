@@ -105,10 +105,17 @@ public class UserServiceImpl implements UserService {
 	}
 
 
-	@Override
+	/*@Override
 	public List<User> blurrySearch(String keyword) {
 		List<User> userSearch = userRepository.findByIdcardContaining(keyword);
 		return userSearch;
+	}*/
+
+
+	@Override
+	public User findByIdcard(String idcard) {
+		User user = userRepository.findByIdcard(idcard);
+		return user;
 	}
 	
 	

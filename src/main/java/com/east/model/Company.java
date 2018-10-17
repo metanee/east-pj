@@ -34,10 +34,11 @@ public class Company  implements UserDetails, Serializable {
 	
 	private String username;
 	private String password;
-	private String companyName;
+	private String firstName;
 	private String address;
 	private String email;
 	private String phone;
+	private String role;
 	private boolean enabled = true;
 
 	@OneToMany(mappedBy = "company", cascade=CascadeType.ALL, fetch= FetchType.EAGER)
@@ -77,12 +78,22 @@ public class Company  implements UserDetails, Serializable {
 	}
 
 
-	public String getCompanyName() {
-		return companyName;
+	public String getRole() {
+		return role;
 	}
 
-	public void setCompanyName(String companyName) {
-		this.companyName = companyName;
+	public void setRole(String role) {
+		this.role = role;
+	}
+
+	
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
 	}
 
 	public String getAddress() {

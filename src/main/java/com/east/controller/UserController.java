@@ -66,13 +66,14 @@ public class UserController {
 		if(userService.findByEmail(userEmail) != null) {
 		return new ResponseEntity("emailExists", HttpStatus.BAD_REQUEST);
 	}
-		if(userService.findByEmail(idcard) != null) {
+		if(userService.findByIdcard(idcard) != null) {
 			return new ResponseEntity("idcardExists", HttpStatus.BAD_REQUEST);
 		}
 		User user = new User();
 		user.setUsername(username);
 		user.setEmail(userEmail);
 		user.setIdcard(idcard);
+		user.setRole("1");
 		
 		String password = SecurityUtility.randomPassword();
 		String encryptedPassword = SecurityUtility.passwordEncoder().encode(password);
@@ -264,6 +265,8 @@ public class UserController {
 		if (null != username) {
 			user = userService.findByUsername(username);
 		}
+		System.out.println(user);
+		System.out.println(username);
 
 		return user;
 	}
@@ -295,7 +298,7 @@ public class UserController {
 		return new ResponseEntity("Remove Success!", HttpStatus.OK);
 	}
 	
-	@RequestMapping(value="/searchUser", method=RequestMethod.POST)
+	/*@RequestMapping(value="/searchUser", method=RequestMethod.POST)
 	public List<User> searchBook (@RequestBody HashMap<String, Object> mapper) {
 		
 		String idcard = (String) mapper.get("searchText");
@@ -307,5 +310,5 @@ public class UserController {
 			return userService.findAll();
 		}
 		
-	}
+	}*/
 }

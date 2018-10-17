@@ -40,6 +40,7 @@ public class EastPjApplication implements CommandLineRunner{
 		user1.setIdcard("1100701904680");
 		user1.setGender("ชาย");
 		user1.setPhone("0800800080");
+		user1.setRole("1");
 		Set<UserRole> userRoles = new HashSet<>();
 		Role role1 = new Role();
 		role1.setRoleId(1);
@@ -56,9 +57,9 @@ public class EastPjApplication implements CommandLineRunner{
 		user2.setPassword(SecurityUtility.passwordEncoder().encode("p"));
 		user2.setEmail("Admin@gmail.com");
 		user2.setIdcard("11007019046804546546");
-		
+		user2.setRole("3");
 		Role role2 = new Role();
-		role2.setRoleId(0);
+		role2.setRoleId(3);
 		role2.setName("ROLE_ADMIN");
 		userRoles.add(new UserRole(user2,null, role2));
 		
@@ -74,6 +75,7 @@ public class EastPjApplication implements CommandLineRunner{
 		user5.setIdcard("5500705904680");
 		user5.setGender("ชาย");
 		user5.setPhone("0800800080");
+		user5.setRole("1");
 		Role role5 = new Role();
 		role5.setRoleId(5);
 		role5.setName("ROLE_USER");
@@ -92,6 +94,8 @@ public class EastPjApplication implements CommandLineRunner{
 		user6.setIdcard("6600706904680");
 		user6.setGender("ชาย");
 		user6.setPhone("0800800080");
+		user6.setRole("1");
+
 		
 		Role role6 = new Role();
 		role6.setRoleId(6);
@@ -110,6 +114,8 @@ public class EastPjApplication implements CommandLineRunner{
 		user7.setIdcard("7700707904780");
 		user7.setGender("ชาย");
 		user7.setPhone("0800800080");
+		user7.setRole("1");
+
 		
 		Role role7 = new Role();
 		role7.setRoleId(7);
@@ -128,6 +134,8 @@ public class EastPjApplication implements CommandLineRunner{
 		user8.setIdcard("8800708904680");
 		user8.setGender("ชาย");
 		user8.setPhone("0800800080");
+		user8.setRole("1");
+
 		
 		Role role8 = new Role();
 		role8.setRoleId(8);
@@ -146,6 +154,8 @@ public class EastPjApplication implements CommandLineRunner{
 		user9.setIdcard("9900709904680");
 		user9.setGender("ชาย");
 		user9.setPhone("0800800080");
+		user9.setRole("1");
+
 		
 		Role role9 = new Role();
 		role9.setRoleId(9);
@@ -164,6 +174,8 @@ public class EastPjApplication implements CommandLineRunner{
 		user10.setIdcard("1010007010904680");
 		user10.setGender("ชาย");
 		user10.setPhone("0800800080");
+		user10.setRole("1");
+
 		
 		Role role10 = new Role();
 		role10.setRoleId(10);
@@ -182,6 +194,8 @@ public class EastPjApplication implements CommandLineRunner{
 		user11.setIdcard("1111007011904680");
 		user11.setGender("ชาย");
 		user11.setPhone("0800800080");
+		user11.setRole("1");
+
 		
 		Role role11 = new Role();
 		role11.setRoleId(11);
@@ -200,6 +214,8 @@ public class EastPjApplication implements CommandLineRunner{
 		user12.setIdcard("1212007012904680");
 		user12.setGender("ชาย");
 		user12.setPhone("0800800080");
+		user12.setRole("1");
+
 		
 		Role role12 = new Role();
 		role12.setRoleId(12);
@@ -218,6 +234,8 @@ public class EastPjApplication implements CommandLineRunner{
 		user13.setIdcard("1313007013904680");
 		user13.setGender("ชาย");
 		user13.setPhone("0800800080");
+		user13.setRole("1");
+
 		
 		Role role13 = new Role();
 		role13.setRoleId(13);
@@ -236,6 +254,8 @@ public class EastPjApplication implements CommandLineRunner{
 		user14.setIdcard("1414007014904680");
 		user14.setGender("ชาย");
 		user14.setPhone("0800800080");
+		user14.setRole("1");
+
 		
 		Role role14 = new Role();
 		role14.setRoleId(14);
@@ -254,6 +274,8 @@ public class EastPjApplication implements CommandLineRunner{
 		user15.setIdcard("1515007015904680");
 		user15.setGender("ชาย");
 		user15.setPhone("0800800080");
+		user15.setRole("1");
+
 		
 		Role role15 = new Role();
 		role15.setRoleId(15);
@@ -272,6 +294,8 @@ public class EastPjApplication implements CommandLineRunner{
 		user16.setIdcard("1616007016904680");
 		user16.setGender("ชาย");
 		user16.setPhone("0800800080");
+		user16.setRole("1");
+
 		
 		Role role16 = new Role();
 		role16.setRoleId(16);
@@ -281,12 +305,32 @@ public class EastPjApplication implements CommandLineRunner{
 		userService.createUser(user16, userRoles);
 		userRoles.clear();
 		
+		User user17 = new User();
+		user17.setFirstName("Metanee");
+		user17.setLastName("Saeheng");
+		user17.setUsername("pioer01");
+		user17.setPassword(SecurityUtility.passwordEncoder().encode("p"));
+		user17.setEmail("cxsads@gmail.com");
+		user17.setIdcard("1717007017904680");
+		user17.setGender("ชาย");
+		user17.setPhone("0800800080");
+		user17.setRole("1");
+
+		
+		Role role17 = new Role();
+		role17.setRoleId(17);
+		role17.setName("ROLE_USER");
+		userRoles.add(new UserRole(user17,null, role17));
+		
+		userService.createUser(user17, userRoles);
+		userRoles.clear();
+		
 		Company company1 = new Company();
-		company1.setCompanyName("Owner");
+		company1.setFirstName("Owner");
 		company1.setUsername("Owner");
 		company1.setPassword(SecurityUtility.passwordEncoder().encode("p"));
 		company1.setEmail("Owner@gmail.com");
-		
+		company1.setRole("2");
 		Role role3 = new Role();
 		role3.setRoleId(2);
 		role3.setName("ROLE_OWNER");
@@ -295,11 +339,11 @@ public class EastPjApplication implements CommandLineRunner{
 		userRoles.clear();
 		
 		Company company2 = new Company();
-		company2.setCompanyName("sadawd");
+		company2.setFirstName("sadawd");
 		company2.setUsername("aaa");
 		company2.setPassword(SecurityUtility.passwordEncoder().encode("p"));
 		company2.setEmail("aaaa@gmail.com");
-		
+		company2.setRole("2");
 		Role role4 = new Role();
 		role4.setRoleId(3);
 		role4.setName("ROLE_OWNER");
